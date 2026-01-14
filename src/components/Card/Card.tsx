@@ -29,7 +29,7 @@ const Card = ({
       </div>
 
       <div className="expense-right">
-        <span className="expense-amount">${amount.toFixed(2)}</span>
+        <span className="expense-amount">₹{amount.toFixed(2)}</span>
         <button onClick={() => deleteExpense(id)} className="btn-delete">
           <TrashIcon />
         </button>

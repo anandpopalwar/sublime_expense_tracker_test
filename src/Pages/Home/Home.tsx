@@ -354,7 +354,7 @@ const Dummy = () => {
                 {expenses && expenses.length}
               </span>
               <span>
-                Total:{" "}
+              ₹ Total:{" "}
                 <span>
                   {filteredExpenses
                     .reduce((acc, curr) => acc + curr.amount, 0)
