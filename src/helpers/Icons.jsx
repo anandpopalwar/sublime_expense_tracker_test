@@ -4,6 +4,7 @@ export const TrashIcon = (props) => (
     height={24}
     viewBox="0 0 0.48 0.48"
     xmlns="http://www.w3.org/2000/svg"
+    fill="#fff"
     {...props}
   >
     <path
@@ -30,7 +31,7 @@ export const ResetIcon = (props) => (
 
 export const CloseIcon = (props) => (
   <svg
-    fill="#000000"
+    fill="#fff"
     width="24px"
     height="24px"
     viewBox="0 0 7.68 7.68"
