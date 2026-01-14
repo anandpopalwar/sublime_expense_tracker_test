@@ -111,20 +111,47 @@ const Dummy = () => {
       return;
     }
 
-    const expense: Expense = {
-      id: Date.now(),
+    const exp: Expense = {
+      id: newExpense?.id ?? Date.now(),
       title: newExpense.title,
       amount: parseFloat(newExpense.amount),
       category: newExpense.category,
       date: newExpense.date,
     };
 
-    let _Ex = expenses;
-    if (_Ex) {
-      setExpenses([..._Ex, expense]);
-    } else {
-      setExpenses([expense]);
-    }
+    // let _Ex = expenses;
+    // if (_Ex) {
+    //   setExpenses([..._Ex, exp]);
+    // } else {
+    //   const exp: Expense = {
+    //     id: Date.now(),
+    //     title: newExpense.title,
+    //     amount: parseFloat(newExpense.amount),
+    //     category: newExpense.category,
+    //     date: newExpense.date,
+    //   };
+    //   setExpenses([exp]);
+    // }
+
+    setExpenses((prevExpenses) => {
+      if (!prevExpenses || prevExpenses.length === 0) {
+        return [exp];
+      }
+
+      // check if id already exists
+      const index = prevExpenses.findIndex((e) => e.id === exp.id);
+
+      // 🔁 UPDATE
+      if (index !== -1) {
+        const updatedExpenses = [...prevExpenses];
+        updatedExpenses[index] = exp;
+        return updatedExpenses;
+      }
+
+      // ➕ ADD
+      return [...prevExpenses, exp];
+    });
+
     setNewExpense({
       title: "",
       amount: "",
@@ -140,6 +167,24 @@ const Dummy = () => {
     if (!_data) return;
     _data = _data.filter((exp) => exp.id != id);
     setExpenses(_data);
+  };
+  const editExpense = (id: number) => {
+    console.log(id);
+    let _data = expenses;
+    if (!_data) return;
+    const item = _data.filter((exp) => exp.id === id);
+    if (!item) return;
+    console.log(item);
+    // setExpenses(_data);
+
+    setNewExpense({
+      id: item[0].id,
+      title: item[0].title,
+      amount: Number(item[0].amount),
+      category: item[0].category,
+      date: item[0].date,
+      status: true,
+    });
   };
 
   const clearFilters = () => {
@@ -354,7 +399,7 @@ const Dummy = () => {
                 {expenses && expenses.length}
               </span>
               <span>
-              ₹ Total:{" "}
+                ₹ Total:{" "}
                 <span>
                   {filteredExpenses
                     .reduce((acc, curr) => acc + curr.amount, 0)
@@ -395,6 +440,7 @@ const Dummy = () => {
                     category={expense.category}
                     date={expense.date}
                     deleteExpense={deleteExpense}
+                    editExpense={editExpense}
                   />
                 ))}
             </div>

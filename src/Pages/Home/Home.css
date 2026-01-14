@@ -221,12 +221,7 @@ body {
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.expense-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05);
-  border-color: var(--primary-light);
-}
-
+ 
 .expense-left {
   display: flex;
   align-items: center;

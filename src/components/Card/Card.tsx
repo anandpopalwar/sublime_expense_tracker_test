@@ -1,4 +1,4 @@
-import { TrashIcon } from "../../helpers/Icons.jsx";
+import { TrashIcon, EditIcon } from "../../helpers/Icons.jsx";
 
 interface ExpenseProp {
   id: number;
@@ -7,6 +7,7 @@ interface ExpenseProp {
   category: string;
   date: string;
   deleteExpense: (id: number) => void;
+  editExpense: (id: number) => void;
 }
 const Card = ({
   id,
@@ -15,6 +16,7 @@ const Card = ({
   category,
   date,
   deleteExpense,
+  editExpense,
 }: ExpenseProp) => {
   return (
     <div key={id} className="expense-item">
@@ -32,6 +34,9 @@ const Card = ({
         <span className="expense-amount">₹{amount.toFixed(2)}</span>
         <button onClick={() => deleteExpense(id)} className="btn-delete">
           <TrashIcon />
+        </button>
+        <button onClick={() => editExpense(id)} className="btn-delete">
+          <EditIcon />
         </button>
       </div>
     </div>
